@@ -48,7 +48,7 @@
                                     <segue destination="5v2-hE-4Ub" kind="show" id="ZrI-KS-fOD"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡️FlashChat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-jv-BlJ" customClass="CLTypingLabel" customModule="CLTypingLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡️FlashChat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-jv-BlJ">
                                 <rect key="frame" x="52" y="418" width="310" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="ph1-wX-D3a"/>
@@ -90,7 +90,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="d41-Gy-G54"/>
                     <connections>
-                        <outlet property="titleLabel" destination="Ipj-e5-54T" id="ATI-Ww-pyP"/>
+                        <outlet property="titleLabel" destination="y7D-jv-BlJ" id="674-vq-hmB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0w-oB-wTX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -370,11 +370,6 @@
             <point key="canvasLocation" x="2032" y="135"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="y7D-jv-BlJ">
-            <size key="intrinsicContentSize" width="307.5" height="60"/>
-        </designable>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="9I7-Xt-JjZ"/>
     </inferredMetricsTieBreakers>
