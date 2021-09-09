@@ -7,13 +7,29 @@
 //
 
 import UIKit
+import Firebase
+import SVProgressHUD
 
 class RegisterViewController: UIViewController {
 
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
-    @IBAction func registerPressed(_ sender: UIButton) {
+    @IBAction func registerPresssed(_ sender: UIButton) {
+        
+        if let email = emailTextfield.text, let password = passwordTextfield.text {
+            SVProgressHUD.show()
+            
+            Auth.auth().createUser(withEmail: email, password: password) { _, error in
+                SVProgressHUD.dismiss()
+                
+                if let e = error {
+                    print(e)
+                } else {
+                    // navigate to chat controller
+                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
+                }
+            }
+        }
     }
-    
 }
