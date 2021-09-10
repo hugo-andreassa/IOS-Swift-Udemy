@@ -10,6 +10,7 @@ target 'Flash Chat iOS13' do
   
   # Pods for Flash Chat iOS13
   pod 'SVProgressHUD'
+  pod 'IQKeyboardManager'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
 
