@@ -7,15 +7,18 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoListViewController: UITableViewController {
     
     var itemArray: [Item] = []
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationItem()
+        loadItems()
     }
     
     // MARK - Setup Methods
@@ -32,11 +35,13 @@ class TodoListViewController: UITableViewController {
         
         let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            self.itemArray.append(
-                Item(textField.text!)
-            )
-            
+            let item = Item(context: self.context)
+            item.title = textField.text
+            item.done = false
+            self.itemArray.append(item)
+        
             self.tableView.reloadData()
+            self.saveItems()
         }
         
         alert.addTextField { (alertTextField) in
@@ -46,6 +51,25 @@ class TodoListViewController: UITableViewController {
         
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func saveItems() {
+        do {
+            try context.save()
+            self.tableView.reloadData()
+        } catch {
+            print("Error saving context \(error)")
+        }
+    }
+    
+    func loadItems() {
+        do {
+            let request: NSFetchRequest<Item> = Item.fetchRequest()
+            self.itemArray = try self.context.fetch(request)
+            tableView.reloadData()
+        } catch {
+            print("Error fetching items \(error)")
+        }
     }
     
     // MARK - TableView Delegate Methods
@@ -66,12 +90,7 @@ class TodoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
-        
+        saveItems()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
